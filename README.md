@@ -41,6 +41,12 @@ apt-get update && apt-get install -y dnsutils
 /scripts/update-dns1.sh
 ```
 
+## per generare la chiave in named.conf
+```bash
+openssl rand -base64 32
+```
+
+
 ## Verification
 
 To verify that your DNS configuration is working correctly, use the dig command:
