@@ -41,7 +41,7 @@ apt-get update && apt-get install -y dnsutils
 /scripts/update-dns1.sh
 ```
 
-## per generare la chiave in named.conf
+## to generate key in named.conf
 ```bash
 openssl rand -base64 32
 ```
