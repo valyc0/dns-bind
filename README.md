@@ -41,11 +41,6 @@ apt-get update && apt-get install -y dnsutils
 /scripts/update-dns1.sh
 ```
 
-## to generate key in named.conf
-```bash
-openssl rand -base64 32
-```
-
 
 ## Verification
 
@@ -56,6 +51,12 @@ dig @172.16.238.10 client1.esempio.com
 ```
 
 This command should return the DNS records for client1.esempio.com from your configured BIND server.
+
+
+## to generate key in named.conf
+```bash
+openssl rand -base64 32
+```
 
 ## Troubleshooting
 
