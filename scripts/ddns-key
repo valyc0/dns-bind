@@ -1,0 +1,4 @@
+key "ddns-key" {
+    algorithm HMAC-SHA256;
+    secret "Lbq2JGNzmApdBbY9WdyH0lKLq6Gg+gqdT00W8wfHhqs=";
+};

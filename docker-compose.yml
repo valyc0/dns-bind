@@ -1,0 +1,63 @@
+version: '3.8'
+
+networks:
+  dns_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.238.0/24
+
+services:
+  bind:
+    image: internetsystemsconsortium/bind9:9.18
+    container_name: bind-server
+    volumes:
+      - ./bind-config:/etc/bind
+      - ./bind-data:/var/lib/bind
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    networks:
+      dns_network:
+        ipv4_address: 172.16.238.10
+    restart: always
+    command: ["-g"] # Modalità foreground per debug
+    environment:
+      - TZ=UTC
+
+  client1:
+    image: debian:bullseye
+    container_name: client1
+    stdin_open: true
+    tty: true
+    depends_on:
+      - bind
+    command: tail -f /dev/null # Rimane attivo per i test
+    volumes:
+      - ./scripts:/scripts
+    environment:
+      - HOSTNAME=client1.esempio.com
+    dns:
+      - 172.16.238.10 # Usa BIND come server DNS
+    networks:
+      dns_network:
+        ipv4_address: 172.16.238.11
+
+  client2:
+    image: debian:bullseye
+    container_name: client2
+    stdin_open: true
+    tty: true
+    depends_on:
+      - bind
+    command: tail -f /dev/null
+    volumes:
+      - ./scripts:/scripts
+    environment:
+      - HOSTNAME=client2.esempio.com
+    dns:
+      - 172.16.238.10 # Usa BIND come server DNS
+    networks:
+      dns_network:
+        ipv4_address: 172.16.238.12
+
