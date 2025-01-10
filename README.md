@@ -33,7 +33,7 @@ echo "nameserver 172.16.238.10" > /etc/resolv.conf
 
 3. Install required DNS utilities:
 ```bash
-apt-get update && apt-get install -y dnsutils
+apt-get update && apt-get install -y dnsutils  iputils-ping
 ```
 
 4. Update DNS configuration:

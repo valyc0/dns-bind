@@ -4,7 +4,8 @@
 DNS_SERVER="172.16.238.10"
 ZONE="esempio.com"
 HOSTNAME="client1.esempio.com"
-IP="172.16.238.11"
+# IP="172.16.238.11"
+IP="$(hostname -I | awk '{print $1}')"
 KEY_FILE="/scripts/ddns-key"
 
 # Esegui nsupdate
